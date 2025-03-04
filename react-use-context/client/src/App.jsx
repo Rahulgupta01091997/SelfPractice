@@ -11,14 +11,13 @@ const App = () => {
   const { dispatch } = useContext(MemoriesContext);
   const [currentId, setCurrentId] = useState(null);
 
-  const getPosts = async () => {
-    const { data } = await axios.get(MEMORIES_URL);
-    dispatch({ type: FETCH_ALL_POST, payload: data });
-  };
-
   useEffect(() => {
+    const getPosts = async () => {
+      const { data } = await axios.get(MEMORIES_URL);
+      dispatch({ type: FETCH_ALL_POST, payload: data });
+    };
     getPosts();
-  }, [currentId]);
+  }, [currentId, dispatch]);
 
   return (
     <Container maxWidth="lg">

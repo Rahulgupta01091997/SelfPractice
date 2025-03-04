@@ -14,7 +14,6 @@ const Form = ({ currentId, setCurrentId }) => {
   });
 
   const { state, dispatch } = useContext(MemoriesContext);
-  console.log(state);
   const post = state.posts.find((post) => currentId === post._id);
   const clear = () => {
     setCurrentId(null);
