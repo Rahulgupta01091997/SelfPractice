@@ -13,9 +13,13 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
 import { MemoriesContext } from "../../../context/Provider";
 import { MEMORIES_URL } from "../../../utils/constants";
-import { DELETE_POST, UPDATE_POST } from "../../../utils/actionTypes";
+import {
+  DELETE_POST,
+  UPDATE_POST,
+  SET_CURRENT_POST_ID,
+} from "../../../utils/actionTypes";
 
-const Post = ({ post, setCurrentId }) => {
+const Post = ({ post }) => {
   const { dispatch } = useContext(MemoriesContext);
 
   const likePost = async (id) => {
@@ -64,7 +68,7 @@ const Post = ({ post, setCurrentId }) => {
             style={{ color: "black" }}
             size="small"
             onClick={() => {
-              setCurrentId(post._id);
+              dispatch({ type: SET_CURRENT_POST_ID, payload: post._id });
             }}>
             <MoreHorizIcon fontSize="medium" />
           </Button>

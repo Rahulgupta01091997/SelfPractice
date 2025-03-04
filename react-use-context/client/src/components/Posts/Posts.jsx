@@ -16,14 +16,14 @@ const Item = styled(Paper)(({ theme }) => ({
   }),
 }));
 
-const Posts = ({ setCurrentId }) => {
+const Posts = () => {
   const { state } = useContext(MemoriesContext);
   return state.posts.length > 0 ? (
     <Grid container alignItems="stretch" spacing={3}>
       {state.posts.map((post) => (
         <Grid key={post._id} size={{ xs: 12, sm: 6 }}>
           <Item sx={{ borderRadius: "20px" }}>
-            <Post post={post} setCurrentId={setCurrentId} />
+            <Post post={post} />
           </Item>
         </Grid>
       ))}

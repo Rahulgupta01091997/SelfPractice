@@ -15,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }),
 }));
 
-const Home = ({ currentId, setCurrentId }) => {
+const Home = () => {
   return (
     <Grow in>
       <Container sx={{ padding: "0px" }}>
@@ -26,12 +26,12 @@ const Home = ({ currentId, setCurrentId }) => {
           spacing={3}>
           <Grid2 size={{ xs: 12, sm: 7 }}>
             <Item sx={{ textAlign: "left", boxShadow: "none", color: "black" }}>
-              <Posts setCurrentId={setCurrentId} />
+              <Posts />
             </Item>
           </Grid2>
           <Grid2 size={{ xs: 12, sm: 4 }}>
             <Item sx={{ textAlign: "left", boxShadow: "none", color: "black" }}>
-              <Form currentId={currentId} setCurrentId={setCurrentId} />
+              <Form />
             </Item>
           </Grid2>
         </Grid2>

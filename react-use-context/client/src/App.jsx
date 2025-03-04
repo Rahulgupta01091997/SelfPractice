@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Container } from "@mui/material";
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
@@ -9,7 +9,6 @@ import { MemoriesContext } from "./context/Provider";
 
 const App = () => {
   const { dispatch } = useContext(MemoriesContext);
-  const [currentId, setCurrentId] = useState(null);
 
   useEffect(() => {
     const getPosts = async () => {
@@ -17,12 +16,12 @@ const App = () => {
       dispatch({ type: FETCH_ALL_POST, payload: data });
     };
     getPosts();
-  }, [currentId, dispatch]);
+  }, [dispatch]);
 
   return (
     <Container maxWidth="lg">
       <Header />
-      <Home currentId={currentId} setCurrentId={setCurrentId} />
+      <Home />
     </Container>
   );
 };

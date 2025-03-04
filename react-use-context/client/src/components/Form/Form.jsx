@@ -3,9 +3,13 @@ import axios from "axios";
 import { TextField, Button, Typography, Paper } from "@mui/material";
 import { MemoriesContext } from "../../context/Provider";
 import { MEMORIES_URL } from "../../utils/constants";
-import { CREATE_POST, UPDATE_POST } from "../../utils/actionTypes";
+import {
+  CREATE_POST,
+  UPDATE_POST,
+  SET_CURRENT_POST_ID,
+} from "../../utils/actionTypes";
 
-const Form = ({ currentId, setCurrentId }) => {
+const Form = () => {
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
@@ -14,9 +18,9 @@ const Form = ({ currentId, setCurrentId }) => {
   });
 
   const { state, dispatch } = useContext(MemoriesContext);
-  const post = state.posts.find((post) => currentId === post._id);
+  const post = state.posts.find((post) => state.currentId === post._id);
   const clear = () => {
-    setCurrentId(null);
+    dispatch({ type: SET_CURRENT_POST_ID, payload: null });
     setPostData({ creator: "", title: "", message: "", tags: "" });
   };
 
@@ -40,10 +44,10 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (currentId === null) {
+    if (state.currentId === null) {
       createPost(postData);
     } else {
-      updatePost(currentId, postData);
+      updatePost(state.currentId, postData);
     }
     clear();
   };
@@ -64,7 +68,7 @@ const Form = ({ currentId, setCurrentId }) => {
           justifyContent: "center",
         }}>
         <Typography variant="h6">
-          {currentId ? `Editing a memory` : "Creating a memory"}
+          {state.currentId ? `Editing a memory` : "Creating a memory"}
         </Typography>
         <TextField
           name="creator"
